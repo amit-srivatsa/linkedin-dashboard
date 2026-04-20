@@ -72,7 +72,7 @@ export default function App() {
           <button
             onClick={() => setShowShare(true)}
             style={{
-              marginLeft: 12, fontSize: 12, padding: '5px 12px',
+              marginLeft: 8, fontSize: 14, padding: '8px 16px',
               background: '#FFD02F', border: 'none', borderRadius: 99,
               cursor: 'pointer', fontWeight: 600, fontFamily: 'Outfit, sans-serif', color: '#1A1A1A'
             }}
