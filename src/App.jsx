@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import posts from './data/posts.json'
 import './App.css'
+import ShareCard from './ShareCard.jsx'
 
 const PILLAR = {
   'AI in practice':    { color: '#1E40AF', bg: '#DBEAFE', short: 'AI' },
@@ -34,6 +35,7 @@ const POST_TYPE = {
 export default function App() {
   const [activeWeek, setActiveWeek] = useState(1)
   const [expandedId, setExpandedId] = useState(null)
+  const [showShare, setShowShare] = useState(false)
 
   const weekPosts = posts.filter(p => p.week === activeWeek)
   const totalPosted = posts.filter(p => p.status === 'posted').length
@@ -67,6 +69,16 @@ export default function App() {
             <span className="stat-num">{20 - totalPosted - totalDrafted}</span>
             <span className="stat-label">remaining</span>
           </div>
+          <button
+            onClick={() => setShowShare(true)}
+            style={{
+              marginLeft: 12, fontSize: 12, padding: '5px 12px',
+              background: '#FFD02F', border: 'none', borderRadius: 99,
+              cursor: 'pointer', fontWeight: 600, fontFamily: 'Outfit, sans-serif', color: '#1A1A1A'
+            }}
+          >
+            Share card
+          </button>
         </div>
       </header>
 
@@ -227,6 +239,7 @@ export default function App() {
         </footer>
 
       </main>
+      {showShare && <ShareCard posts={posts} onClose={() => setShowShare(false)} />}
     </div>
   )
 }
