@@ -1,0 +1,91 @@
+period,dimension,value,percentage
+current,location,India,36
+current,location,United States,18
+current,location,United Kingdom,7
+current,location,Netherlands,10
+current,location,Germany,4
+current,location,United Arab Emirates,6
+current,location,Canada,5
+current,location,Other,14
+current,industry,Higher Education,18
+current,industry,Staffing and Recruiting,14
+current,industry,IT Services,13
+current,industry,Financial Services,11
+current,industry,Software Development,8
+current,industry,Marketing and Advertising,6
+current,industry,"Technology, Information and Internet",4
+current,industry,Legal Services,2
+current,industry,Other,24
+current,seniority,Entry,24
+current,seniority,Senior,25
+current,seniority,Manager,23
+current,seniority,Training,8
+current,seniority,Unpaid,8
+current,seniority,Director,6
+current,seniority,VP,3
+current,seniority,CXO,2
+current,seniority,Owner,1
+current,titles,Software Engineer,18
+current,titles,Student,14
+current,titles,Recruiter,12
+current,titles,Marketing Manager,10
+current,titles,Content Manager,8
+current,titles,Product Manager,7
+current,titles,Data Analyst,6
+current,titles,Head of Content,2
+current,titles,CMO,1
+current,titles,VP Marketing,1
+current,titles,Content Director,1
+current,titles,Other,20
+current,companySize,11-50,24
+current,companySize,51-200,22
+current,companySize,1-10,18
+current,companySize,201-500,12
+current,companySize,501-1000,6
+current,companySize,1001-5000,8
+current,companySize,5001-10000,4
+current,companySize,10001+,6
+previous,location,India,41
+previous,location,United States,19
+previous,location,United Kingdom,8
+previous,location,Netherlands,7
+previous,location,Germany,3
+previous,location,United Arab Emirates,5
+previous,location,Canada,5
+previous,location,Other,12
+previous,industry,Higher Education,21
+previous,industry,Staffing and Recruiting,16
+previous,industry,IT Services,14
+previous,industry,Financial Services,10
+previous,industry,Software Development,6
+previous,industry,Marketing and Advertising,5
+previous,industry,"Technology, Information and Internet",3
+previous,industry,Legal Services,1
+previous,industry,Other,24
+previous,seniority,Entry,28
+previous,seniority,Senior,24
+previous,seniority,Manager,22
+previous,seniority,Training,9
+previous,seniority,Unpaid,9
+previous,seniority,Director,4
+previous,seniority,VP,2
+previous,seniority,CXO,1
+previous,seniority,Owner,1
+previous,titles,Software Engineer,20
+previous,titles,Student,16
+previous,titles,Recruiter,13
+previous,titles,Marketing Manager,9
+previous,titles,Content Manager,7
+previous,titles,Product Manager,7
+previous,titles,Data Analyst,6
+previous,titles,Head of Content,1
+previous,titles,CMO,1
+previous,titles,Other,20
+previous,companySize,11-50,26
+previous,companySize,51-200,24
+previous,companySize,1-10,20
+previous,companySize,201-500,10
+previous,companySize,501-1000,5
+previous,companySize,1001-5000,7
+previous,companySize,5001-10000,3
+previous,companySize,10001+,5

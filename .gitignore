@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Real LinkedIn exports. Never commit audience data.
+*.xlsx
+*.xls
+*.xlsm
+AggregateAnalytics*

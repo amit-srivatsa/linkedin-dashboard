@@ -1,94 +1,85 @@
-# LinkedIn Dashboard — Handoff
+# Audience quality map
 
-## What this is
-A Vite + React dashboard for tracking a 4-week LinkedIn content strategy. Miro-inspired design (yellow #FFD02F accent, dark header, warm canvas background). Deployed to Vercel, connected to GitHub for auto-deploy on push.
+In-browser ICP diagnostic for LinkedIn analytics exports.
 
-## Repo
-`https://github.com/amit-srivatsa/linkedin-dashboard`
+Native LinkedIn analytics treats all reach as equal. This tool asks a different question: **did the right fifty decision-makers see the work, or did the graph just go up?**
 
-## Stack
-- Vite + React (no TypeScript)
-- Pure CSS (no Tailwind, no component library)
-- Google Fonts: Outfit
-- No backend, no database
+Drop a standard Followers / Posts export, set a target persona, and read three numbers:
 
-## How data works
-All post data lives in one file: `src/data/posts.json`
+1. **ICP match rate** (share of reach inside the persona envelope)
+2. **Wasted reach** (the rest: viral drift)
+3. **Pillar vs audience pull** (which topics buy decision-makers, which topics buy noise)
 
-This is the single source of truth. To update the dashboard, edit this file and push to `main`. Vercel auto-deploys in ~30 seconds.
+[Load the invented demo](http://localhost:5173) locally. Public posts and screenshots must use that demo. Never commit a real export.
 
-### Post object schema
-```json
-{
-  "id": "w1-1",
-  "week": 1,
-  "day": "Mon",
-  "pillar": "AI in practice",
-  "idea": "The original brief/prompt for this post",
-  "status": "todo",
-  "postTitle": "What was actually posted",
-  "postType": "carousel",
-  "effort": "medium",
-  "link": "https://linkedin.com/posts/..."
-}
+## How it works
+
+- **Client-side only.** CSV and XLSX are parsed in the browser with SheetJS. Nothing is uploaded.
+- **Target persona.** Titles, seniority, industry, company size, geography. Saved in `localStorage` on this device.
+- **Match rate.** Each LinkedIn demographic list is scored against the persona. Seniority is weighted highest so intern and student noise cannot look like pipeline. LinkedIn does not export a true cross-tab, so this is an envelope, not an AND of all four filters.
+- **Pillars.** Post titles are classified into governance, marketing craft, founder notes, and NL-anchored. Override by adding a `pillar` column. If the file includes `icp_match` per post (as the demo does), you get quality by topic. Native LinkedIn exports usually do not.
+- **Drift.** If the file has a previous snapshot, or you drop a later export, the last run on this device is used as the baseline.
+
+## How to export from LinkedIn
+
+1. Open LinkedIn Analytics (creator or Page).
+2. Export **Followers** (demographics: location, industry, seniority, titles, company size).
+3. Export **Posts** / updates for the same window.
+4. Drop both files here.
+
+Creator **Aggregate analytics** `.xlsx` works too. The app reads Content demographics as people who saw your posts, Audience demographics as follower mix, and Top posts (impressions plus engagements). Real exports stay on your machine and are gitignored.
+
+The parser also accepts a simple long table:
+
+```
+period,dimension,value,percentage
+current,location,Netherlands,10
+current,seniority,Director,6
 ```
 
-**Valid values:**
-- `status`: `todo` | `drafted` | `posted` | `skipped`
-- `postType`: `text` | `carousel` | `image` | `video` | `poll` | `article`
-- `effort`: `low` | `medium` | `high`
-- `pillar`: `AI in practice` | `NL-anchored` | `Marketing craft` | `Open availability`
+and a posts table with `title`, `impressions`, optional `pillar` and `icp_match`.
 
-Empty string `""` means not set yet. Leave blank if unknown.
+Sample files live in `public/demo/`.
 
-## File structure
-```
-linkedin-dashboard/
-├── src/
-│   ├── data/posts.json     ← EDIT THIS to update the dashboard
-│   ├── App.jsx             ← Main component
-│   ├── App.css             ← All styles
-│   └── main.jsx            ← Entry point
-├── index.html
-├── package.json
-├── vite.config.js
-└── vercel.json
-```
+## Privacy
 
-## Update workflow
-1. Edit `src/data/posts.json`
-2. `git add src/data/posts.json`
-3. `git commit -m "Update post data"`
-4. `git push origin main`
-5. Vercel deploys automatically
+| What | How |
+| --- | --- |
+| File handling | Read in memory in this tab. Never sent to a server |
+| Persona | `localStorage` on this device only |
+| Last snapshot | `localStorage`, used only to compute drift |
+| Accounts | None. No LinkedIn login, scrape, or API |
+| Demo data | Invented. Not a real audience |
 
-## Common tasks
+## What I left out
 
-### Mark a post as posted
-Find the post by `id` (format: `w{week}-{dayIndex}`, e.g. `w1-3` = Week 1 Wednesday), update:
-```json
-"status": "posted",
-"postTitle": "Actual title or first line of the post",
-"postType": "carousel",
-"effort": "medium",
-"link": "https://www.linkedin.com/posts/..."
-```
+- Follower count as a headline metric
+- Scheduling or publishing
+- Scrapers, extensions, or OAuth
+- True cross-tab intersection (LinkedIn does not export it)
+- Per-post demographics unless you add them (Day 27 can extend this)
 
-### Add a new week or change the brief
-Edit the `idea` field of the relevant post object.
+## Team of fifty
 
-### Change status only
-Just update the `status` field. Other fields can stay empty.
+An editorial director with fifty writers should be able to say: we did not just get 20k views. We moved Heads of Content in enterprise from 8% to 27% of active reach. That is the sentence this dashboard is built to produce.
 
-## Local dev
+## Run locally
+
 ```bash
 npm install
 npm run dev
 ```
-Runs at `http://localhost:5173`
 
-## Deploy
+Opens at `http://localhost:5173`.
+
 ```bash
-npm run build   # outputs to dist/
+npm run build
 ```
-Vercel handles deployment automatically on push to `main`.
+
+Vercel deploys from `main` if this repo is connected.
+
+## Stack
+
+Vite, React, pure CSS (Outfit, yellow `#FFD02F`, bento cards), SheetJS in the browser. No backend.
+
+Built for Buildtober day 2.
