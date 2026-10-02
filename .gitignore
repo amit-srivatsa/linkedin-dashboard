@@ -28,3 +28,6 @@ dist-ssr
 *.xls
 *.xlsm
 AggregateAnalytics*
+LINKEDIN_POST.md
+.env*
+
